@@ -323,4 +323,4 @@ if __name__ == "__main__":
         args.offload = True
 
     demo = create_demo(args, args.name, args.device, args.offload, args.aggressive_offload)
-    demo.launch(server_name='0.0.0.0', server_port=args.port)
+    demo.launch(share=True)
