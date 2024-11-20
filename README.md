@@ -7,15 +7,13 @@
 > ByteDance Inc <br>
 
 ### :triangular_flag_on_post: Updates
+* **2024.10.31**: 🔥 We are happy to release our latest [models](https://huggingface.co/guozinan/PuLID), **PuLID-v1.1** and **PuLID-FLUX-v0.9.1**. See more in [Model Zoo](#european_castle-model-zoo) and [pulid v1.1 model](docs/pulid_v1.1.md). We also update a new revision for the [arXiv paper](https://arxiv.org/abs/2404.16022), which includes more results, details, and analysis, please check it out.
 * **2024.09.26**: 🎉 PuLID accepted by NeurIPS 2024
-* **2024.09.12**: 💥 We're thrilled to announce the release of the **PuLID-FLUX-v0.9.0 model**. Enjoy exploring its capabilities! 😊 [Learn more about this model](docs/pulid_for_flux.md)
+* **2024.09.12**: We're thrilled to announce the release of the **PuLID-FLUX-v0.9.0 model**. Enjoy exploring its capabilities! 😊 [Learn more about this model](docs/pulid_for_flux.md)
 * **2024.05.23**: share the [preview of our upcoming v1.1 model](docs/v1.1_preview.md), please stay tuned
 * **2024.05.01**: release v1 codes&models, also the [🤗HuggingFace Demo](https://huggingface.co/spaces/yanze/PuLID)
 * **2024.04.25**: release arXiv paper.
 
-### :soon: update plan
-- [ ] release PuLID-FLUX-v0.9.1 model in 2024.10
-- [ ] release PuLID v1.1 (for SDXL) model in 2024.10
 
 ## PuLID for FLUX
 Please check the doc and demo of PuLID-FLUX [here](docs/pulid_for_flux.md).
@@ -28,6 +26,7 @@ We will actively update and maintain this repository in the near future, so plea
 - [x] We have optimized the codes to support consumer-grade GPUS, and now **PuLID-FLUX can run on a 16GB graphic card**. Check the details [here](https://github.com/ToTheBeginning/PuLID/blob/main/docs/pulid_for_flux.md#local-gradio-demo)
 - [x] (Community Implementation) Online Replicate demo is ready now [![Replicate](https://replicate.com/zsxkib/flux-pulid/badge)](https://replicate.com/zsxkib/flux-pulid)
 - [x] Local gradio demo supports 12GB graphic card now
+- [x] v0.9.1 is ready now
 
 
 Below results are generated with PuLID-FLUX.
@@ -40,6 +39,16 @@ Images generated with our PuLID
 Applications
 
 https://github.com/ToTheBeginning/PuLID/assets/11482921/9bdd0c8a-99e8-4eab-ab9e-39bf796cc6b8
+
+## :european_castle: Model Zoo
+
+|                                              Version                                               | Base Model |                                                                                              Description                                                                                              |
+|:--------------------------------------------------------------------------------------------------:|:----------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|              [PuLID-v1](https://huggingface.co/guozinan/PuLID/blob/main/pulid_v1.bin)              |    SDXL    |                                                                                             Paper model.                                                                                              |
+|        [PuLID-v1.1](https://huggingface.co/guozinan/PuLID/blob/main/pulid_v1.1.safetensors)        |    SDXL    |                                                     Compared to PuLID-v1, better compatibility, editability, facial naturalness, and similarity.                                                      |
+| [PuLID-FLUX-v0.9.0](https://huggingface.co/guozinan/PuLID/blob/main/pulid_flux_v0.9.0.safetensors) |    FLUX    |             Our first version for PuLID-FLUX, better prompt-following and image quality (since FLUX is more powerful than SDXL). But ID fidelity is not high enough for some male inputs              |
+| [PuLID-FLUX-v0.9.1](https://huggingface.co/guozinan/PuLID/blob/main/pulid_flux_v0.9.1.safetensors) |    FLUX    | Compared to PuLID-FLUX-v0.9.0, better ID fidelity. From the quantitative metric of ID similarity, the improvement is about 5 percentage points. Meanwhile, the editability remains similar as before. |
+
 
 ## :wrench: Dependencies and Installation
 - Python >= 3.9 (Recommend to use [Anaconda](https://www.anaconda.com/download/#linux) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html))
@@ -62,7 +71,13 @@ pip install -r requirements_fp8.txt
 ## :zap: Quick Inference
 ### Local Gradio Demo
 ```bash
+# for v1 version
 python app.py
+
+# for v1.1 version
+python app_v1.1.py --base BASE_MODEL
+Usage:
+  -base: can be RunDiffusion/Juggernaut-XL-v9 or Lykon/dreamshaper-xl-lightning
 ```
 
 ### Online HuggingFace Demo

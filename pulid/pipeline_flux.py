@@ -14,7 +14,7 @@ from torchvision.transforms.functional import normalize, resize
 
 from eva_clip import create_model_and_transforms
 from eva_clip.constants import OPENAI_DATASET_MEAN, OPENAI_DATASET_STD
-from pulid.encoders_flux import IDFormer, PerceiverAttentionCA
+from pulid.encoders_transformer import IDFormer, PerceiverAttentionCA
 from pulid.utils import img2tensor, tensor2img
 
 
@@ -91,9 +91,9 @@ class PuLIDPipeline(nn.Module):
         self.clip_vision_model = self.clip_vision_model.to(device)
         self.pulid_encoder = self.pulid_encoder.to(device)
 
-    def load_pretrain(self, pretrain_path=None):
-        hf_hub_download('guozinan/PuLID', 'pulid_flux_v0.9.0.safetensors', local_dir='models')
-        ckpt_path = 'models/pulid_flux_v0.9.0.safetensors'
+    def load_pretrain(self, pretrain_path=None, version='v0.9.0'):
+        hf_hub_download('guozinan/PuLID', f'pulid_flux_{version}.safetensors', local_dir='models')
+        ckpt_path = f'models/pulid_flux_{version}.safetensors'
         if pretrain_path is not None:
             ckpt_path = pretrain_path
         state_dict = load_file(ckpt_path)
